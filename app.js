@@ -1,6 +1,8 @@
 // http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
 "use strict";
 
+require('newrelic');
+
 // Optional. You will see this name in eg. 'ps' or 'top' command
 process.title = 'node-tiles';
 
