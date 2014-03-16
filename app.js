@@ -82,7 +82,7 @@ var wsServer = new WebSocketServer({
 });
 
 wsServer.on('connection', function(socket) {
-    console.log((new Date()) + ' Connection from origin ' + socket.origin + '.');
+    console.log((new Date()) + ' Connection from origin ' + socket.address + '.');
 
     var index = clients.push(socket) - 1;
     var userName = false;
@@ -95,11 +95,22 @@ wsServer.on('connection', function(socket) {
             if (userName === false) { // first message sent by user is their name
                 // remember user name
                 userName = inbound.name;
-                // get random color and send it back to the user
 
                 console.log((new Date()) + ' User is known as: ' + userName);
-
                 socket.send(JSON.stringify( { type: 'history', data: tiles} ));
+            }
+        }
+
+        if (inbound.type === 'dstart' || inbound.type === 'dstop') {
+            var broadcastData = {
+                u: userName,
+                id: inbound.id
+            };
+
+            // broadcast message to all connected clients
+            var json = JSON.stringify({ type: inbound.type, data: broadcastData });
+            for (var i=0; i < clients.length; i++) {
+                clients[i].send(json);
             }
         }
 

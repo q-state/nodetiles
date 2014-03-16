@@ -31,10 +31,14 @@ $(function () {
         input.removeAttr('disabled');
         status.text('Choose name:');
         input.focus();
+
+        // send keep-alive
+        setInterval(function() {
+            connection.send(JSON.stringify({ka:1}));
+        }, 30000 );
     };
 
     connection.onerror = function (error) {
-        // just in there were some problems with conenction...
         content.html($('<p>', { text: 'Sorry, but there\'s some problem with your '
             + 'connection or the server is down.' } ));
     };
@@ -51,17 +55,47 @@ $(function () {
             return;
         }
 
-        if (json.type === 'cds') { // it's a single message
+        if (json.type === 'cds') {
             if(json.data.u != myName) {
                 var boxData = json.data;
                 $('#box' + boxData.id).offset({ top: boxData.y, left: boxData.x });
+                var api = $('#box' + boxData.id).qtip('api');
+                api.reposition(null, false);
             }
-        } else if (json.type === 'history') {
+        }
+
+        if (json.type === 'history') {
             // received the history (positions of boxes)
             initializeBoxes(json.data);
-        } else {
-            console.log('Hmm..., I\'ve never seen JSON like this: ', json);
         }
+
+        if (json.type === 'dstart') {
+            if(json.data.u != myName) {
+                var boxData = json.data;
+                $('#box' + boxData.id).qtip({
+                    content: boxData.u,
+                    position: {
+                        corner: {
+                            target: 'topRight',
+                            tooltip: 'bottomLeft'
+                        }
+                    }
+                });
+
+                var api = $('#box' + boxData.id).qtip('api');
+                api.show();
+            }
+        }
+
+        if (json.type === 'dstop') {
+            if(json.data.u != myName) {
+                var boxData = json.data;
+
+                var api = $('#box' + boxData.id).qtip('api');
+                api.destroy();
+            }
+        }
+
     };
 
     /**
@@ -109,12 +143,18 @@ $(function () {
         $(".box").draggable({
             drag: function(ev) {
                 var target = ev.target;
-                var newCoords = { type: 'cds', id: this.id.replace('box', ''), x: target.offsetLeft, y: target.offsetTop };
+                var newCoords = { type: 'cds', a: myName, id: this.id.replace('box', ''), x: target.offsetLeft, y: target.offsetTop };
                 connection.send(JSON.stringify(newCoords));
+            },
+            start: function(ev)
+            {
+                var payload = { type: 'dstart', a: myName, id: this.id.replace('box', '')  };
+                connection.send(JSON.stringify(payload));
             },
             stop: function(ev)
             {
-
+                var payload = { type: 'dstop', a: myName, id: this.id.replace('box', '')  };
+                connection.send(JSON.stringify(payload));
             }
         });
     }
