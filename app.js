@@ -59,8 +59,6 @@ var app = express();
 
 // all environments
 app.set('port', webSocketsServerPort);
-app.set('views', path.join(__dirname, 'views'));
-app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());

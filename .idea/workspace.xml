@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60d4d952-f3b2-4c06-afe6-5fc3541ef503" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/favicon.ico" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
     </list>
     <ignored path="NodeTiles.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,7 +49,7 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="0" selection-start="3151" selection-end="3151" vertical-scroll-proportion="0.5391566" vertical-offset="1614" max-vertical-offset="2448">
+            <state line="63" column="30" selection-start="1572" selection-end="1572" vertical-scroll-proportion="0.5376506" vertical-offset="714" max-vertical-offset="2414">
               <folding />
             </state>
           </provider>
@@ -90,8 +90,8 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/chat-frontend.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -474,7 +474,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="0" selection-start="3151" selection-end="3151" vertical-scroll-proportion="0.5391566" vertical-offset="1614" max-vertical-offset="2448">
+        <state line="63" column="30" selection-start="1572" selection-end="1572" vertical-scroll-proportion="0.5376506" vertical-offset="714" max-vertical-offset="2414">
           <folding />
         </state>
       </provider>
