@@ -32,7 +32,7 @@ function htmlEntities(str) {
 // Letter positions array
 var tiles = [];
 var tile = 0;
-for(var s = 0; s < 10; s++) {
+for(var s = 0; s < 4; s++) {
     for(var a = 0; a < 26; a++) {
         var tileObj = {
             s: s,

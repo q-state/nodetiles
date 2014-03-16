@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="60d4d952-f3b2-4c06-afe6-5fc3541ef503" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/chat-frontend.js" afterPath="$PROJECT_DIR$/public/javascripts/chat-frontend.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NodeTiles.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,10 +25,10 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="chat-frontend.js" pinned="false" current="true" current-in-tab="true">
+            <file leaf-file-name="chat-frontend.js" pinned="false" current="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/public/javascripts/chat-frontend.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="26" column="71" selection-start="833" selection-end="833" vertical-scroll-proportion="0.47624847" vertical-offset="51" max-vertical-offset="2992">
+                  <state line="15" column="0" selection-start="441" selection-end="441" vertical-scroll-proportion="0.31059682" vertical-offset="0" max-vertical-offset="2992">
                     <folding />
                   </state>
                 </provider>
@@ -47,19 +45,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="20" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="2601">
+            <state line="34" column="20" selection-start="860" selection-end="860" vertical-scroll-proportion="0.40963855" vertical-offset="306" max-vertical-offset="2601">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="71" selection-start="172" selection-end="172" vertical-scroll-proportion="0.13322884" vertical-offset="0" max-vertical-offset="850">
+            <state line="24" column="9" selection-start="809" selection-end="809" vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="850">
               <folding />
             </state>
           </provider>
@@ -81,9 +79,9 @@
         <option value="$PROJECT_DIR$/node_modules/express/node_modules/connect/node_modules/cookie-parser/package.json" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/public/javascripts/chat-frontend.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -348,7 +346,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39883268" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879376" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879376" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -474,23 +472,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/chat-frontend.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="20" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="2601">
+        <state line="15" column="0" selection-start="441" selection-end="441" vertical-scroll-proportion="0.31059682" vertical-offset="0" max-vertical-offset="2992">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="71" selection-start="172" selection-end="172" vertical-scroll-proportion="0.13322884" vertical-offset="0" max-vertical-offset="850">
+        <state line="24" column="9" selection-start="809" selection-end="809" vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="850">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/chat-frontend.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="71" selection-start="833" selection-end="833" vertical-scroll-proportion="0.47624847" vertical-offset="51" max-vertical-offset="2992">
+        <state line="34" column="20" selection-start="860" selection-end="860" vertical-scroll-proportion="0.40963855" vertical-offset="306" max-vertical-offset="2601">
           <folding />
         </state>
       </provider>
