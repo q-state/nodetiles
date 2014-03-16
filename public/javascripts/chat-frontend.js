@@ -24,12 +24,13 @@ $(function () {
     }
 
     // open connection
-    var connection = new WebSocket('ws://' + document.location.hostname + ':1337');
+    var connection = new WebSocket('ws://' + document.location.hostname + ':5000');
 
     connection.onopen = function () {
         // first we want users to enter their names
         input.removeAttr('disabled');
         status.text('Choose name:');
+        input.focus();
     };
 
     connection.onerror = function (error) {
@@ -50,14 +51,7 @@ $(function () {
             return;
         }
 
-        // NOTE: if you're not sure about the JSON structure
-        // check the server source code above
-        if (json.type === 'color') { // first response from the server with user's color
-            myColor = json.data;
-            status.text(myName + ': ').css('color', myColor);
-            input.removeAttr('disabled').focus();
-            // from now user can start sending messages
-        } else if (json.type === 'cds') { // it's a single message
+        if (json.type === 'cds') { // it's a single message
             if(json.data.u != myName) {
                 var boxData = json.data;
                 $('#box' + boxData.id).offset({ top: boxData.y, left: boxData.x });
@@ -80,7 +74,7 @@ $(function () {
                 return;
             }
             // send the message as an ordinary text
-            connection.send(msg);
+            connection.send(JSON.stringify({ type: 'logon', name: msg}));
             $(this).val('');
             // disable the input field to make the user wait until server
             // sends back response
@@ -115,7 +109,7 @@ $(function () {
         $(".box").draggable({
             drag: function(ev) {
                 var target = ev.target;
-                var newCoords = { id: this.id.replace('box', ''), x: target.offsetLeft, y: target.offsetTop };
+                var newCoords = { type: 'cds', id: this.id.replace('box', ''), x: target.offsetLeft, y: target.offsetTop };
                 connection.send(JSON.stringify(newCoords));
             },
             stop: function(ev)
@@ -134,8 +128,4 @@ $(function () {
 
         makeBoxesDraggable();
     }
-
-    setTimeout(function() {
-        $("#input").focus();
-    }, 250);
 });

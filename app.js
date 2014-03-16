@@ -2,17 +2,16 @@
 "use strict";
 
 // Optional. You will see this name in eg. 'ps' or 'top' command
-process.title = 'node-chat';
+process.title = 'node-tiles';
 
 // Port where we'll run the websocket server
-var webSocketsServerPort = 1337;
+var webSocketsServerPort = process.env.PORT || 5000;
 
 // websocket and http servers
-var webSocketServer = require('websocket').server;
+var WebSocketServer = require('ws').Server;
 var http = require('http');
 var url = require("url");
 var st = require('node-static');
-var fileServer = new st.Server('./');
 
 /**
  * Global variables
@@ -59,9 +58,8 @@ var path = require('path');
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', webSocketsServerPort);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -70,17 +68,10 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
-    console.log(__dirname);
-});
-
 /**
  * HTTP server
  */
-var server = http.createServer(function(request, response) {
-    // Not important for us. We're writing WebSocket server, not HTTP server
-});
+var server = http.createServer(app);
 server.listen(webSocketsServerPort, function() {
     console.log((new Date()) + " Server is listening on port " + webSocketsServerPort);
 });
@@ -88,70 +79,53 @@ server.listen(webSocketsServerPort, function() {
 /**
  * WebSocket server
  */
-var wsServer = new webSocketServer({
-    // WebSocket server is tied to a HTTP server. WebSocket request is just
-    // an enhanced HTTP request. For more info http://tools.ietf.org/html/rfc6455#page-6
-    httpServer: server
+var wsServer = new WebSocketServer({
+    server: server
 });
 
-// This callback function is called every time someone
-// tries to connect to the WebSocket server
-wsServer.on('request', function(request) {
-    console.log((new Date()) + ' Connection from origin ' + request.origin + '.');
+wsServer.on('connection', function(socket) {
+    console.log((new Date()) + ' Connection from origin ' + socket.origin + '.');
 
-    // accept connection - you should check 'request.origin' to make sure that
-    // client is connecting from your website
-    // (http://en.wikipedia.org/wiki/Same_origin_policy)
-    var connection = request.accept(null, request.origin);
-
-    // we need to know client index to remove them on 'close' event
-    var index = clients.push(connection) - 1;
+    var index = clients.push(socket) - 1;
     var userName = false;
     var userColor = false;
 
-    console.log((new Date()) + ' Connection accepted.');
-
     // user sent some message
-    connection.on('message', function(message) {
-        if (message.type === 'utf8') { // accept only text
+    socket.on('message', function(message) {
+        var inbound = JSON.parse(message);
+        if (inbound.type === 'logon') { // accept only text
             if (userName === false) { // first message sent by user is their name
                 // remember user name
-                userName = htmlEntities(message.utf8Data);
+                userName = inbound.name;
                 // get random color and send it back to the user
-                userColor = colors.shift();
-                connection.sendUTF(JSON.stringify({ type:'color', data: userColor }));
 
-                console.log((new Date()) + ' User is known as: ' + userName
-                    + ' with ' + userColor + ' color.');
+                console.log((new Date()) + ' User is known as: ' + userName);
 
-                connection.sendUTF(JSON.stringify( { type: 'history', data: tiles} ));
+                socket.send(JSON.stringify( { type: 'history', data: tiles} ));
+            }
+        }
 
-            } else { // log and broadcast the message
-                var inbound = JSON.parse(message.utf8Data);
+        if (inbound.type === 'cds') {
+            tiles[inbound.id].x = inbound.x;
+            tiles[inbound.id].y = inbound.y;
 
-                tiles[inbound.id].x = inbound.x;
-                tiles[inbound.id].y = inbound.y;
+            var broadcastData = {
+                u: userName,
+                id: inbound.id,
+                x: inbound.x,
+                y: inbound.y
+            };
 
-                console.log('updating ' + inbound.id);
-
-                var broadcastData = {
-                    u: userName,
-                    id: inbound.id,
-                    x: inbound.x,
-                    y: inbound.y
-                };
-
-                // broadcast message to all connected clients
-                var json = JSON.stringify({ type:'cds', data: broadcastData });
-                for (var i=0; i < clients.length; i++) {
-                    clients[i].sendUTF(json);
-                }
+            // broadcast message to all connected clients
+            var json = JSON.stringify({ type:'cds', data: broadcastData });
+            for (var i=0; i < clients.length; i++) {
+                clients[i].send(json);
             }
         }
     });
 
     // user disconnected
-    connection.on('close', function(connection) {
+    socket.on('close', function(connection) {
         if (userName !== false && userColor !== false) {
             console.log((new Date()) + " Peer "
                 + connection.remoteAddress + " disconnected.");
