@@ -24,7 +24,7 @@ $(function () {
     }
 
     // open connection
-    var connection = new WebSocket('ws://' + document.location.hostname);
+    var connection = new WebSocket('wss://' + document.location.hostname);
 
     connection.onopen = function () {
         // first we want users to enter their names
